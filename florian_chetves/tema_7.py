@@ -8,7 +8,6 @@ Conține o metodă a clasei descrie() - aceasta printează pe ecran ‘Cel mai
 probabil am colturi’
 """
 class FormaGeometrica(ABC):
-    Pi = 3.14
 
     def aria(self):
         raise NotImplementedError
