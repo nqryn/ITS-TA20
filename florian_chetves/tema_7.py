@@ -51,7 +51,7 @@ class Patrat(FormaGeometrica):
         return self.latura()**2
 
 class Cerc(FormaGeometrica):
-
+    Pi = 3.14
     def __init__(self, raza):
         self.__r = raza
 
