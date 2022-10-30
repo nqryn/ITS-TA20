@@ -70,11 +70,10 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     - Verifică dacă atributul href al linkului ‘Elemental Selenium’ e corect
     """
 
-    # def test_elemental_selenium_href(self):
-    #     elemental_selenium_button = self.chrome.find_element(By.XPATH, '//a[@href="http://elementalselenium.com/"]')
-    #     elemental_selenium_button.click()
-    #     time.sleep(3)
-    #     assert self.chrome.current_url == "http://elementalselenium.com/", "elemental selenium href error"
+    def test_elemental_selenium_href(self):
+        elemental_selenium_button = self.chrome.find_element(By.XPATH, '//a[@href="http://elementalselenium.com/"]')
+        href_attribute = elemental_selenium_button.get_attribute('href')
+        assert href_attribute == "http://elementalselenium.com/", "elemental selenium href error"
 
     """
     Test 6
@@ -107,10 +106,10 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
         pass_input.send_keys('G4arden!ng')
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
-        login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]')
-        self.assertEqual(login_error_msg.text, "Your username is invalid!\n×")
-        # expected = 'Your username is invalid!'
-        # self.assertTrue(expected in login_error_msg, 'Error message text is incorrect')
+        login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]').text
+        # self.assertEqual(login_error_msg.text, "Your username is invalid!\n×")
+        expected = 'Your username is invalid!'
+        self.assertTrue(expected in login_error_msg, 'Error message text is incorrect')
 
     """
     Test 8
@@ -128,7 +127,8 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
         # time.sleep(3)
         # login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]')
         # assert login_error_msg.is_displayed(), "invalid user error message display error"
-        # # X nu e buton, e text
+
+        # # X is not a button, it's just a text - it doesn't close anything
 
     """
     Test 9
@@ -166,9 +166,8 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
         flash_success_element = WebDriverWait(self.chrome, 10).until(
             EC.presence_of_element_located((By.XPATH, '//div[@class="flash success"]'))
         )
-        flash_success_element_banner = self.chrome.find_element(By.XPATH, '//div[@class="flash success"]')
-        assert flash_success_element_banner.is_displayed(), '"flash success" element display error'
-        self.assertIn("secure area!", flash_success_element_banner.text)
+        assert flash_success_element.is_displayed(), '"flash success" element display error'
+        self.assertIn("secure area!", flash_success_element.text)
 
     """
     Test 11
