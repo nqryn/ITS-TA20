@@ -140,7 +140,6 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
 
     def test_labels(self):
         labels = self.chrome.find_elements(By.TAG_NAME, 'label')
-        # print(len(labels))
         self.assertEqual(labels[0].text, "Username")
         self.assertEqual(labels[1].text, "Password")
 
