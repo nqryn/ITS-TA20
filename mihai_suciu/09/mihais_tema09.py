@@ -187,5 +187,37 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
         logout_button.click()
         assert self.chrome.current_url == "https://the-internet.herokuapp.com/login"
 
+    """
+    Test 12 - brute force password hacking
+    - Completează user tomsmith
+    - Găsește elementul //h4
+    - Ia textul de pe el și fă split după spațiu. Consideră fiecare cuvânt ca o
+    potențială parolă.
+    - Folosește o structură iterativă prin care să introduci rând pe rând
+    parolele și să apeși pe login.
+    - La final testul trebuie să îmi printeze fie
+    ‘Nu am reușit să găsesc parola’
+    ‘Parola secretă este [parola]’
+    """
+    def test_brute_force_pass_hack(self):
+        h4_text_elements_list = self.chrome.find_elements(By.XPATH, '//h4/*')
+        possible_password_list = []
+        for element in h4_text_elements_list:
+            possible_password_list.append(element.text)
+        for item in possible_password_list:
+            user_input = self.chrome.find_element(By.XPATH, '//input[@name="username"]')
+            user_input.send_keys('tomsmith')
+            pass_input = self.chrome.find_element(By.XPATH, '//input[@name="password"]')
+            pass_input.clear()
+            pass_input.send_keys(item)
+            login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
+            login_button.click()
+            if self.chrome.current_url == 'https://the-internet.herokuapp.com/secure':
+                secret_password = item
+        if self.chrome.current_url == 'https://the-internet.herokuapp.com/secure':
+            print(f'I found the secret password: {secret_password}')
+        else:
+            print("I didn't find the secret password")
+
     def tearDown(self) -> None:
         self.chrome.quit()
