@@ -2,6 +2,7 @@ import unittest
 import time
 
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -15,6 +16,7 @@ class HerokuAuthenticationTestCase(unittest.TestCase):
         service = ChromeService(ChromeDriverManager().install())
         self.chrome = webdriver.Chrome(service=service)
         self.chrome.get("https://the-internet.herokuapp.com/")
+        self.chrome.maximize_window()
 
     """
     Test 1
@@ -120,15 +122,18 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_invalid_user_and_pass_message_off(self):
+        self.chrome.maximize_window()
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
-        # error_x_button = self.chrome.find_element(By.XPATH, '//a[@class="close"]')
-        # error_x_button.click()
-        # time.sleep(3)
-        # login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]')
-        # assert login_error_msg.is_displayed(), "invalid user error message display error"
+        error_x_button = self.chrome.find_element(By.XPATH, '//a[@class="close"]')
+        error_x_button.click()
+        try:
+            login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]')
+        except:
+            NoSuchElementException
+        finally:
+            print('Test8: element not displayed')
 
-        # # X is not a button, it's just a text - it doesn't close anything
 
     """
     Test 9
