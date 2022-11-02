@@ -24,6 +24,7 @@ class HerokuAuthenticationTestCase(unittest.TestCase):
     """
 
     def test_form_authentication_button(self):
+        print("Start: Test 1(form_authentication_button)")
         self.form_authentication_btt = self.chrome.find_element(By.XPATH, '//*[text()="Form Authentication"]')
         self.form_authentication_btt.click()
         assert self.chrome.current_url == "https://the-internet.herokuapp.com/login", "form_authentication_button error"
@@ -40,12 +41,21 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
         self.chrome = webdriver.Chrome(service=service)
         self.chrome.get("https://the-internet.herokuapp.com/login")
 
+    def complete_user_pass_fields(self, username, password):
+        user_input = self.chrome.find_element(By.XPATH, '//input[@name="username"]')
+        user_input.clear()
+        user_input.send_keys(username)
+        pass_input = self.chrome.find_element(By.XPATH, '//input[@name="password"]')
+        pass_input.clear()
+        pass_input.send_keys(password)
+
     """
     Test 2
     - Verifică dacă page title e corect
     """
 
     def test_login_page_title_1(self):
+        print("Start: Test 2(test_login_page_title)")
         title1 = self.chrome.find_element(By.TAG_NAME, 'h2')
         self.assertEqual(title1.text, "Login Page")
 
@@ -55,6 +65,7 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_login_page_title_2(self):
+        print("Start: Test 3(test_login_page_title)")
         title2 = self.chrome.find_element(By.XPATH, '//h2')
         self.assertEqual(title2.text, "Login Page")
 
@@ -64,6 +75,7 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_login_button_displayed(self):
+        print("Start: Test 4(test_login_button_displayed)")
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         assert login_button.is_displayed(), "login button not displayed error"
 
@@ -73,7 +85,8 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_elemental_selenium_href(self):
-        elemental_selenium_button = self.chrome.find_element(By.XPATH, '//a[@href="http://elementalselenium.com/"]')
+        print("Start: Test 5(test_elemental_selenium_href)")
+        elemental_selenium_button = self.chrome.find_element(By.XPATH, '//*[text()="Elemental Selenium"]')
         href_attribute = elemental_selenium_button.get_attribute('href')
         assert href_attribute == "http://elementalselenium.com/", "elemental selenium href error"
 
@@ -85,6 +98,7 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_login_error(self):
+        print("Start: Test 6(test_login_error)")
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
         login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]')
@@ -102,10 +116,8 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_invalid_user_and_pass_message_on(self):
-        user_input = self.chrome.find_element(By.XPATH, '//input[@name="username"]')
-        user_input.send_keys('red_cat')
-        pass_input = self.chrome.find_element(By.XPATH, '//input[@name="password"]')
-        pass_input.send_keys('G4arden!ng')
+        print("Start: Test 7(test_invalid_user_and_pass_message_on)")
+        self.complete_user_pass_fields('red_cat', 'G4arden!ng')
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
         login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]').text
@@ -122,6 +134,7 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_invalid_user_and_pass_message_off(self):
+        print("Start: Test 8(test_invalid_user_and_pass_message_off)")
         self.chrome.maximize_window()
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
@@ -129,9 +142,7 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
         error_x_button.click()
         try:
             login_error_msg = self.chrome.find_element(By.XPATH, '//div[@id="flash"]')
-        except:
-            NoSuchElementException
-        finally:
+        except NoSuchElementException:
             print('Test8: element not displayed')
 
 
@@ -144,6 +155,7 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_labels(self):
+        print("Start: Test 9(test Username & Password labels)")
         labels = self.chrome.find_elements(By.TAG_NAME, 'label')
         self.assertEqual(labels[0].text, "Username")
         self.assertEqual(labels[1].text, "Password")
@@ -159,10 +171,8 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_good_user_pass_login(self):
-        user_input = self.chrome.find_element(By.XPATH, '//input[@name="username"]')
-        user_input.send_keys('tomsmith')
-        pass_input = self.chrome.find_element(By.XPATH, '//input[@name="password"]')
-        pass_input.send_keys('SuperSecretPassword!')
+        print("Start: Test 10(test_good_user_pass_login)")
+        self.complete_user_pass_fields('tomsmith', 'SuperSecretPassword!')
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
         new_url = self.chrome.current_url
@@ -182,10 +192,8 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     """
 
     def test_login_logout(self):
-        user_input = self.chrome.find_element(By.XPATH, '//input[@name="username"]')
-        user_input.send_keys('tomsmith')
-        pass_input = self.chrome.find_element(By.XPATH, '//input[@name="password"]')
-        pass_input.send_keys('SuperSecretPassword!')
+        print("Start: Test 11(test_login_logout)")
+        self.complete_user_pass_fields('tomsmith', 'SuperSecretPassword!')
         login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
         login_button.click()
         logout_button = self.chrome.find_element(By.XPATH, '//*[text()=" Logout"]')
@@ -205,16 +213,13 @@ class HerokuFormAuthenticationPageTestCase(unittest.TestCase):
     ‘Parola secretă este [parola]’
     """
     def test_brute_force_pass_hack(self):
+        print("Start: Test 12(test_brute_force_pass_hack)")
         h4_text_elements_list = self.chrome.find_elements(By.XPATH, '//h4/*')
         possible_password_list = []
         for element in h4_text_elements_list:
             possible_password_list.append(element.text)
         for item in possible_password_list:
-            user_input = self.chrome.find_element(By.XPATH, '//input[@name="username"]')
-            user_input.send_keys('tomsmith')
-            pass_input = self.chrome.find_element(By.XPATH, '//input[@name="password"]')
-            pass_input.clear()
-            pass_input.send_keys(item)
+            self.complete_user_pass_fields('tomsmith', item)
             login_button = self.chrome.find_element(By.XPATH, '//i[@class="fa fa-2x fa-sign-in"]')
             login_button.click()
             if self.chrome.current_url == 'https://the-internet.herokuapp.com/secure':
