@@ -29,12 +29,15 @@ class MyFirstTestCase(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    # @unittest.skipIf(environment=="PRODUCTION", "Do not run on production")
     def test_nothing(self):
         assert 1 + 1 == 2
 
     def not_a_test(self):
         print("This is not a test!")
 
+    # Folosim decoratorul de skip ca sa "sarim" peste teste
+    @unittest.skip
     def test_something(self):
         assert len("Adela") == 5
 
@@ -57,7 +60,7 @@ class JulesTestCase(unittest.TestCase):
         expected_url = "https://jules.app/forgot-password"
         # assert self.chrome.current_url == expected_url
         self.assertEqual(self.chrome.current_url, expected_url, "URL-ul nu este cel asteptat!")
-        self.assertIn("forgot-password", self.chrome.current_url)
+        self.assertIn("forgot-password2", self.chrome.current_url)
 
 
 class EmagTestCase(unittest.TestCase):

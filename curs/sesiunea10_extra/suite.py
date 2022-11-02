@@ -3,7 +3,7 @@ import unittest
 import HtmlTestRunner
 
 from curs.sesiunea9_verificari.test_unit import MyFirstTestCase, JulesTestCase
-
+from mihai_suciu.mihais_tema09 import HerokuAuthenticationTestCase
 
 class MyFirstTestSuite(unittest.TestCase):
 
@@ -14,7 +14,8 @@ class MyFirstTestSuite(unittest.TestCase):
         # pe care vrem sa le rulam
         my_test_suite.addTests([
             unittest.defaultTestLoader.loadTestsFromTestCase(MyFirstTestCase),
-            unittest.defaultTestLoader.loadTestsFromTestCase(JulesTestCase)
+            unittest.defaultTestLoader.loadTestsFromTestCase(JulesTestCase),
+            unittest.defaultTestLoader.loadTestsFromTestCase(HerokuAuthenticationTestCase),
         ])
 
         # Facem un test runner HTML, care va genera pentru noi niste rapoarte
