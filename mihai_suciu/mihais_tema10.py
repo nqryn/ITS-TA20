@@ -3,7 +3,6 @@ import HTMLTestRunner
 from mihais_tema09 import HerokuFormAuthenticationPageTestCase
 from mihais_tema09 import HerokuAuthenticationTestCase
 from curs.sesiunea10_extra.alerts import AlertTests
-#test
 
 class Tema09TestSuite(unittest.TestCase):
 
