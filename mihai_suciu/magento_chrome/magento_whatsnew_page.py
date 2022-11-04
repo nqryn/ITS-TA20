@@ -2,16 +2,16 @@ import unittest
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.edge.service import Service as EdgeService
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class MagentoWhatsnewPageTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
-        service = EdgeService(EdgeChromiumDriverManager().install())
-        self.driver = webdriver.Edge(service=service)
-        # self.driver.implicitly_wait(3)
+        service = ChromeService(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service)
+        self.driver.implicitly_wait(10)
         self.driver.get("https://magento.softwaretestingboard.com/what-is-new.html")
 
     def tearDown(self) -> None:
