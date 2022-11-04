@@ -1,9 +1,9 @@
 import unittest
-import HTMLTestRunner
+import HtmlTestRunner
 from mihais_tema09 import HerokuFormAuthenticationPageTestCase
 from mihais_tema09 import HerokuAuthenticationTestCase
 from curs.sesiunea10_extra.alerts import AlertTests
-#test
+
 
 class Tema09TestSuite(unittest.TestCase):
 
@@ -16,10 +16,11 @@ class Tema09TestSuite(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromTestCase(AlertTests)
         ])
 
-        test_runner = HTMLTestRunner.HTMLTestRunner(
+        test_runner = HtmlTestRunner.HTMLTestRunner(
             report_title="Heroku Test",
             report_name="Heroku Authentication Test Case",
             combine_reports=True
             )
 
         test_runner.run(my_test_suite)
+
