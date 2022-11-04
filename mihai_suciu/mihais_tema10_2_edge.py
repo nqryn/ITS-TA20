@@ -1,9 +1,9 @@
 import unittest
 import HtmlTestRunner
-from magento_chrome.magento_login_page import MagentoLoginTestCase
-from magento_chrome.magento_first_page import MagentoFirstPageTestCase   # blocheaza generarea raportului
-from magento_chrome.magento_create_account_page import MagentoCreateAccountTestCase  # blocheaza generarea raportului
-from magento_chrome.magento_whatsnew_page import MagentoWhatsnewPageTestCase
+from Magento.magento_login_page import MagentoLoginTestCase
+from Magento.magento_first_page import MagentoFirstPageTestCase   # erori de Assert(try-except)
+from Magento.magento_create_account_page import MagentoCreateAccountTestCase  # erori de Assert(try-except)
+from Magento.magento_whatsnew_page import MagentoWhatsnewPageTestCase
 
 
 class MagentoTestSuite(unittest.TestCase):
@@ -20,7 +20,7 @@ class MagentoTestSuite(unittest.TestCase):
 
         test_runner = HtmlTestRunner.HTMLTestRunner(
             report_title="Magento Report",
-            report_name="Chrome Report",
+            report_name="Edge Report",
             combine_reports=True
         )
 

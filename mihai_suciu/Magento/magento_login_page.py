@@ -1,5 +1,4 @@
 import unittest
-import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -12,7 +11,7 @@ class MagentoLoginTestCase(unittest.TestCase):
     def setUp(self) -> None:
         service = EdgeService(EdgeChromiumDriverManager().install())
         self.driver = webdriver.Edge(service=service)
-        self.driver.implicitly_wait(3)
+        self.driver.implicitly_wait(10)
         self.driver.get("https://magento.softwaretestingboard.com/"
                         "customer/account/login/referer/"
                         "aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/")
@@ -33,7 +32,6 @@ class MagentoLoginTestCase(unittest.TestCase):
         error_msg_banner = self.driver.find_element(By.XPATH, '/ html / body / div[2] /'
                                                               ' header / div[1] / div / '
                                                               'ul / li[2] / a')
-        time.sleep(3)
         assert error_msg_banner.is_displayed(), "Error message banner was not displayed"
 
     def test_no_credentials_login(self):
@@ -41,15 +39,10 @@ class MagentoLoginTestCase(unittest.TestCase):
         error_msg_banner = self.driver.find_element(By.XPATH, '/ html / body / div[2] /'
                                                               ' header / div[1] / div / '
                                                               'ul / li[2] / a')
-        time.sleep(3)
         assert error_msg_banner.is_displayed(), "Error message banner was not displayed"
 
     def test_good_credentials_login(self):
         self.customer_login('roni_cost@example.com', 'roni_cost3@example.com')
-        error_msg_banner = self.driver.find_element(By.XPATH, '/ html / body / div[2] /'
-                                                              ' header / div[1] / div /'
-                                                              ' ul / li[2] / a')
-        time.sleep(3)
         assert self.driver.current_url == "https://magento.softwaretestingboard.com/" \
                                           "customer/account/login/referer/" \
                                           "aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/", \
@@ -57,6 +50,4 @@ class MagentoLoginTestCase(unittest.TestCase):
 
     def test_captcha_image(self):
         captcha_image = self.driver.find_element(By.TAG_NAME, 'img')
-        time.sleep(3)
         assert captcha_image.is_displayed(), "Captcha image not displayed"
-

@@ -11,7 +11,7 @@ class MagentoFirstPageTestCase(unittest.TestCase):
     def setUp(self) -> None:
         service = EdgeService(EdgeChromiumDriverManager().install())
         self.driver = webdriver.Edge(service=service)
-        self.driver.implicitly_wait(3)
+        self.driver.implicitly_wait(10)
         self.driver.get("https://magento.softwaretestingboard.com/")
 
     def tearDown(self) -> None:
@@ -20,7 +20,9 @@ class MagentoFirstPageTestCase(unittest.TestCase):
     def test_login_button(self):
         login_button = self.driver.find_element(By.PARTIAL_LINK_TEXT, 'Sign In')
         login_button.click()
-        assert self.driver.current_url == "https://magento.softwaretestingboard.com/customer/account/login/referer/aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/"
+        assert self.driver.current_url == "https://magento.softwaretestingboard.com/" \
+                                          "customer/account/login/referer/" \
+                                          "aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/"
 
     def test_create_an_Account(self):
         create_button = self.driver.find_element(By.XPATH, '//a[text()="Create an Account"]')
@@ -43,4 +45,3 @@ class MagentoFirstPageTestCase(unittest.TestCase):
         whats_new_btt = self.driver.find_element(By.XPATH, '//span[text()="What\'s New"]')
         whats_new_btt.click()
         assert self.driver.current_url == "https://magento.softwaretestingboard.com/what-is-new.html"
-

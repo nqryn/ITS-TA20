@@ -11,7 +11,7 @@ class MagentoWhatsnewPageTestCase(unittest.TestCase):
     def setUp(self) -> None:
         service = EdgeService(EdgeChromiumDriverManager().install())
         self.driver = webdriver.Edge(service=service)
-        # self.driver.implicitly_wait(3)
+        self.driver.implicitly_wait(10)
         self.driver.get("https://magento.softwaretestingboard.com/what-is-new.html")
 
     def tearDown(self) -> None:
@@ -113,5 +113,3 @@ class MagentoWhatsnewPageTestCase(unittest.TestCase):
         grey_button = self.driver.find_element(By.XPATH, '//*[@id="option-label-color-93-item-59"]')
         grey_button.click()
         assert grey_button.is_enabled(), "Button selection error"
-
-

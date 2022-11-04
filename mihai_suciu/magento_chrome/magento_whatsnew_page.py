@@ -114,4 +114,3 @@ class MagentoWhatsnewPageTestCase(unittest.TestCase):
         grey_button.click()
         assert grey_button.is_enabled(), "Button selection error"
 
-
