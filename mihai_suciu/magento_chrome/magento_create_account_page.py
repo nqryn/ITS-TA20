@@ -37,16 +37,15 @@ class MagentoCreateAccountTestCase(unittest.TestCase):
 
     def test_page_title(self):
         page_title = self.driver.find_element(By.TAG_NAME, 'h1')
-        assert page_title.text == "Create New Customer Account"
+        assert page_title.text == "Create New Customer Account", "Error: Page title error"
 
     # !!! you need a new email each time else --> TEST FAILS!!!
     def test_create_account_good_credentials(self):
-        self.complete_fields('Tester', 'Automation', 'qa22_tester@ibm.com', 'Q4T3ster!', 'Q4T3ster!')
+        self.complete_fields('Tester', 'Automation', 'qa22_tester@ibm.com',
+                             'Q4T3ster!', 'Q4T3ster!')
         self.create_account_button_click()
-        try:
-            assert self.driver.current_url == "https://magento.softwaretestingboard.com/customer/account/"
-        except AssertionError:
-            print("Error: !!!you need a new email each time, else --> TEST FAILS!!!")
+        assert self.driver.current_url == "https://magento.softwaretestingboard.com/customer/account/", \
+            "Error: !!!you need a new email each time, else --> TEST FAILS!!!"
 
     def test_password_strenght_banner_display(self):
         password_strenght_banner = self.driver.find_element(By.ID, 'password-strength-meter-label')
@@ -61,37 +60,29 @@ class MagentoCreateAccountTestCase(unittest.TestCase):
     def test_first_name_no_credentials(self):
         self.create_account_button_click()
         first_name_error_field = self.driver.find_element(By.XPATH, '//*[@id="firstname"]')
-        try:
-            assert first_name_error_field.text == 'This is a required field.'
-        except AssertionError:
-            print("Error: page has different behaviour - manual/automated")
+        assert first_name_error_field.text == 'This is a required field.', \
+            "Error: Page has different behaviours manual/automated"
 
     def test_last_name_no_credentials(self):
         self.create_account_button_click()
         last_name_error_field = self.driver.find_element(By.XPATH, '//*[@id="lastname"]')
-        try:
-            assert last_name_error_field.text == 'This is a required field.'
-        except AssertionError:
-            print("Error: page has different behaviour - manual/automated")
+        assert last_name_error_field.text == 'This is a required field.', \
+            "Error: Page has different behaviours manual/automated"
 
     def test_email_no_credentials(self):
         self.create_account_button_click()
         email_error_field = self.driver.find_element(By.XPATH, '//*[@id="email_address"]')
-        try:
-            assert email_error_field.text == 'This is a required field.'
-        except AssertionError:
-            print("Error: page has different behaviour - manual/automated")
+        assert email_error_field.text == 'This is a required field.', \
+            "Error: Page has different behaviours manual/automated"
 
-    # def test_confirm_password_no_credentials(self):
-    #     self.create_account_button_click()
-    #     confirm_password_field = self.driver.find_element(By.XPATH, '//*[@id="password-confirmation-error"]')
-    #     try:
-    #         assert confirm_password_field.text == 'This is a required field.'
-    #     except AssertionError:
-    #         print("Error: page has different behaviour - manual/automated")
+    def test_confirm_password_no_credentials(self):
+        self.create_account_button_click()
+        confirm_password_field = self.driver.find_element(By.XPATH, '//*[@id="password-confirmation-error"]')
+        assert confirm_password_field.text == 'This is a required field.', \
+            "Error: Page has different behaviours manual/automated"
 
     def test_luma_button(self):
         luma_button = self.driver.find_element(By.TAG_NAME, 'img')
         luma_button.click()
-        assert self.driver.current_url == 'https://magento.softwaretestingboard.com/'
+        assert self.driver.current_url == 'https://magento.softwaretestingboard.com/', "URL Error"
 

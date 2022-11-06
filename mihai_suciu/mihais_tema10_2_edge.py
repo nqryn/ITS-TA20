@@ -1,9 +1,9 @@
 import unittest
-import HtmlTestRunner
-from Magento.magento_login_page import MagentoLoginTestCase
-from Magento.magento_first_page import MagentoFirstPageTestCase   # erori de Assert(try-except)
-from Magento.magento_create_account_page import MagentoCreateAccountTestCase  # erori de Assert(try-except)
-from Magento.magento_whatsnew_page import MagentoWhatsnewPageTestCase
+import HTMLTestRunner
+from magento_edge.magento_login_page import MagentoLoginTestCase
+from magento_edge.magento_first_page import MagentoFirstPageTestCase   # erori de Assert
+from magento_edge.magento_create_account_page import MagentoCreateAccountTestCase  # erori de Assert
+from magento_edge.magento_whatsnew_page import MagentoWhatsnewPageTestCase
 
 
 class MagentoTestSuite(unittest.TestCase):
@@ -18,10 +18,12 @@ class MagentoTestSuite(unittest.TestCase):
             unittest.defaultTestLoader.loadTestsFromTestCase(MagentoWhatsnewPageTestCase),
         ])
 
-        test_runner = HtmlTestRunner.HTMLTestRunner(
-            report_title="Magento Report",
-            report_name="Edge Report",
-            combine_reports=True
+        test_runner = HTMLTestRunner.HTMLTestRunner(
+            title='magento_edge Test Report',
+            report_name='ITF - Tema 10',
+            description='Edge - HTMLTestRunner',
+            tested_by="Mihai Suciu",
+            open_in_browser=True
         )
 
         test_runner.run(my_test_suite)

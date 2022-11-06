@@ -22,26 +22,28 @@ class MagentoFirstPageTestCase(unittest.TestCase):
         login_button.click()
         assert self.driver.current_url == "https://magento.softwaretestingboard.com/" \
                                           "customer/account/login/referer/" \
-                                          "aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/"
+                                          "aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/", \
+            "URL Error"
 
     def test_create_an_Account(self):
         create_button = self.driver.find_element(By.XPATH, '//a[text()="Create an Account"]')
         create_button.click()
-        assert self.driver.current_url == "https://magento.softwaretestingboard.com/customer/account/create/"
+        assert self.driver.current_url == "https://magento.softwaretestingboard.com/" \
+                                          "customer/account/create/", \
+            "URL Error"
 
     def test_luma_logo(self):
         luma_logo = self.driver.find_elements(By.TAG_NAME, 'img')
-        assert luma_logo[0].is_displayed()
+        assert luma_logo[0].is_displayed(), "Error: Logo not displayed"
 
     def test_empty_shopping_cart(self):
         cart_button = self.driver.find_element(By.XPATH, '//a[@class="action showcart"]')
         cart_button.click()
-        try:
-            assert self.driver.current_url == 'https://magento.softwaretestingboard.com/'
-        except AssertionError:
-            print("Error: page has different behaviours -manual/automated")
+        assert self.driver.current_url == 'https://magento.softwaretestingboard.com/', \
+            "Error: page has different behaviours -manual/automated"
 
     def test_whats_new_button(self):
         whats_new_btt = self.driver.find_element(By.XPATH, '//span[text()="What\'s New"]')
         whats_new_btt.click()
-        assert self.driver.current_url == "https://magento.softwaretestingboard.com/what-is-new.html"
+        assert self.driver.current_url == "https://magento.softwaretestingboard.com/what-is-new.html", \
+            "URL Error"

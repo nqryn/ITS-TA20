@@ -24,7 +24,8 @@ class MagentoWhatsnewPageTestCase(unittest.TestCase):
                                                               'div[1]/div[1]/a/img')
         yoga_collection_img_button.click()
         assert self.driver.current_url == "https://magento.softwaretestingboard.com/" \
-                                          "collections/yoga-new.html", "URL Link Error"
+                                          "collections/yoga-new.html", \
+            "URL Link Error"
 
     def test_shop_new_yoga(self):
         shop_new_yoga_button = self.driver.find_element(By.XPATH, '//span[@class="more button"]')
