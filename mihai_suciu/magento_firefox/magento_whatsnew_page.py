@@ -1,5 +1,6 @@
 import unittest
-
+import os
+from mihai_suciu.config import API_KEY
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
@@ -7,6 +8,8 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 class MagentoWhatsnewPageTestCase(unittest.TestCase):
+
+    os.environ['GH_TOKEN'] = API_KEY
 
     def setUp(self) -> None:
         service = FirefoxService(GeckoDriverManager().install())
@@ -113,4 +116,3 @@ class MagentoWhatsnewPageTestCase(unittest.TestCase):
         grey_button = self.driver.find_element(By.XPATH, '//*[@id="option-label-color-93-item-59"]')
         grey_button.click()
         assert grey_button.is_enabled(), "Button selection error"
-

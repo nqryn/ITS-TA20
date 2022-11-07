@@ -1,5 +1,6 @@
 import unittest
-
+import os
+from mihai_suciu.config import API_KEY
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
@@ -7,6 +8,8 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 class MagentoCreateAccountTestCase(unittest.TestCase):
+
+    os.environ['GH_TOKEN'] = API_KEY
 
     def setUp(self) -> None:
         service = FirefoxService(GeckoDriverManager().install())
@@ -32,8 +35,9 @@ class MagentoCreateAccountTestCase(unittest.TestCase):
         password_confirmation_field.send_keys(password2)
 
     def create_account_button_click(self):
-        create_an_account_button = self.driver.find_elements(By.XPATH, '//*[text()="Create an Account"]')
-        create_an_account_button[2].click()
+        create_an_account_button = self.driver.find_element(By.XPATH, '/html/body/div[2]/main/div[3]/'
+                                                                      'div/form/div/div[1]/button/span')
+        create_an_account_button.click()
 
     def test_page_title(self):
         page_title = self.driver.find_element(By.TAG_NAME, 'h1')
@@ -41,7 +45,7 @@ class MagentoCreateAccountTestCase(unittest.TestCase):
 
     # !!! you need a new email each time else --> TEST FAILS!!!
     def test_create_account_good_credentials(self):
-        self.complete_fields('Tester', 'Automation', 'qa22_tester@ibm.com',
+        self.complete_fields('Tester', 'Automation', 'qa24_tester@ibm.com',
                              'Q4T3ster!', 'Q4T3ster!')
         self.create_account_button_click()
         assert self.driver.current_url == "https://magento.softwaretestingboard.com/customer/account/", \
@@ -85,4 +89,3 @@ class MagentoCreateAccountTestCase(unittest.TestCase):
         luma_button = self.driver.find_element(By.TAG_NAME, 'img')
         luma_button.click()
         assert self.driver.current_url == 'https://magento.softwaretestingboard.com/', "URL Error"
-

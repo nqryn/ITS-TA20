@@ -1,5 +1,6 @@
 import unittest
-
+import os
+from mihai_suciu.config import API_KEY
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
@@ -7,6 +8,8 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 class MagentoLoginTestCase(unittest.TestCase):
+
+    os.environ['GH_TOKEN'] = API_KEY
 
     def setUp(self) -> None:
         service = FirefoxService(GeckoDriverManager().install())
@@ -51,4 +54,3 @@ class MagentoLoginTestCase(unittest.TestCase):
     def test_captcha_image(self):
         captcha_image = self.driver.find_element(By.TAG_NAME, 'img')
         assert captcha_image.is_displayed(), "Captcha image not displayed"
-
