@@ -23,9 +23,8 @@ def step_impl(context):
     context.browser.click_login_button()
 
 
-@Then('I receive the "Your username is invalid!" error message')
-def step_impl(context):
-    err_msg = 'Your username is invalid!'
+@Then('I receive the "{err_msg}" error message')
+def step_impl(context, err_msg):
     assert context.browser.is_error_message_valid(err_msg), \
         "Error message is not valid"
 
@@ -48,16 +47,8 @@ def step_impl(context):
     context.browser.input_password(password)
 
 
-@Then('I receive the "Your password is invalid!" error message')
-def step_impl(context):
-    err_msg = 'Your password is invalid!'
-    assert context.browser.is_error_message_valid(err_msg), \
-        "Error message is not valid"
-
-
-@Then('I receive the "You logged into a secure area!" login message')
-def step_impl(context):
-    msg = 'You logged into a secure area!'
+@Then('I receive the "{msg}" login message')
+def step_impl(context, msg):
     assert context.browser.is_error_message_valid(msg), \
         "Secure area message is not valid"
 
