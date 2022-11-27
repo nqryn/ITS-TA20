@@ -1,0 +1,21 @@
+Feature: Cart Page # features/cart.feature:1
+
+  @Cart
+  Scenario: I Buy products                       # features/cart.feature:3
+    Given I am a logged in user                  # features/steps/inventory.py:4
+    And I am on the Inventory Page               # features/steps/inventory.py:10
+    When I add to cart all the products under 20 # features/steps/inventory.py:65
+    And I click the Cart button                  # features/steps/inventory.py:76
+    Then I am on the Cart Page                   # features/steps/inventory.py:81
+    And The Cart badge counter is 4              # features/steps/inventory.py:70
+    When I click the Checkout button             # features/steps/cart.py:4
+    Then I am on the Checkout Step One Page      # features/steps/cart.py:9
+    When I input the first name                  # features/steps/cart.py:14
+    And I input the last name                    # features/steps/cart.py:19
+    And I input the Zip Code                     # features/steps/cart.py:24
+    And I click the Continue button              # features/steps/cart.py:29
+    Then I am on the Checkout Step Two Page      # features/steps/cart.py:34
+    When I click Finish button                   # features/steps/cart.py:39
+    Then I am on the Checkout Complete Page      # features/steps/cart.py:44
+
+Feature: Inventory Page # features/inventory.feature:1
