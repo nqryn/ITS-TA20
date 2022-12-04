@@ -1,0 +1,216 @@
+{
+	"id": "90574714-8c5c-4039-bb83-ffe7ed4af6d1",
+	"name": "Reqres API",
+	"timestamp": "2022-12-04T21:35:22.071Z",
+	"collection_id": "24706515-84ccc2a9-8456-4548-9422-ead0177f58d3",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "93b95889-956a-4fb0-ad39-66ca8d0b95e7",
+			"name": "GetUsersList",
+			"url": "https://reqres.in/api/users?page=2",
+			"time": 71,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				71
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0d5ac109-ecf5-4599-b0e2-bad8c1c942c6",
+			"name": "CreateUser",
+			"url": "https://reqres.in/api/users",
+			"time": 100,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				100
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5bead34b-e8a2-4704-8b62-6ebb6e3f584b",
+			"name": "GetUser",
+			"url": "https://reqres.in/api/users/?id=7",
+			"time": 63,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				63
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "84d5d474-6cb4-4779-88f9-e4197abfa229",
+			"name": "GetInexistentUser",
+			"url": "https://reqres.in/api/users?id=8888",
+			"time": 71,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				71
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d91cc049-9f96-43af-b67a-67f443637dae",
+			"name": "PatchUpdateUser",
+			"url": "https://reqres.in/api/users/?id=7",
+			"time": 97,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				97
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e812b625-96ee-42ef-b2f7-d1cfc890284f",
+			"name": "DeleteUser",
+			"url": "https://reqres.in/api/users/?id=3",
+			"time": 99,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				99
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "44d4676e-842b-44a1-9857-4ae57352edb1",
+			"name": "LoginSuccessful",
+			"url": "https://reqres.in/api/login",
+			"time": 95,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				95
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "63843c77-8690-48a9-848e-0e02f6979b08",
+			"name": "LoginUnsuccessful",
+			"url": "https://reqres.in/api/login",
+			"time": 95,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				95
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1d54cf5e-940c-429b-bf4d-0f4e3210a1e9",
+			"name": "UpdateUser",
+			"url": "https://reqres.in/api/users/1",
+			"time": 101,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				101
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 792,
+	"collection": {
+		"requests": [
+			{
+				"id": "93b95889-956a-4fb0-ad39-66ca8d0b95e7",
+				"method": "GET"
+			},
+			{
+				"id": "0d5ac109-ecf5-4599-b0e2-bad8c1c942c6",
+				"method": "POST"
+			},
+			{
+				"id": "5bead34b-e8a2-4704-8b62-6ebb6e3f584b",
+				"method": "GET"
+			},
+			{
+				"id": "84d5d474-6cb4-4779-88f9-e4197abfa229",
+				"method": "GET"
+			},
+			{
+				"id": "d91cc049-9f96-43af-b67a-67f443637dae",
+				"method": "PATCH"
+			},
+			{
+				"id": "e812b625-96ee-42ef-b2f7-d1cfc890284f",
+				"method": "DELETE"
+			},
+			{
+				"id": "44d4676e-842b-44a1-9857-4ae57352edb1",
+				"method": "POST"
+			},
+			{
+				"id": "63843c77-8690-48a9-848e-0e02f6979b08",
+				"method": "POST"
+			},
+			{
+				"id": "1d54cf5e-940c-429b-bf4d-0f4e3210a1e9",
+				"method": "PUT"
+			}
+		]
+	}
+}
