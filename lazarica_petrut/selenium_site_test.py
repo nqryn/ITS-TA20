@@ -7,8 +7,10 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.alert import Alert
 
+
 class SeleniumEasyTest(unittest.TestCase):
 
+    # Setup for Unittest TestCase
     @classmethod
     def setUp(self):
         Service(ChromeDriverManager().install())
@@ -16,14 +18,21 @@ class SeleniumEasyTest(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.driver.get("https://demo.seleniumeasy.com/")
 
+# Functions ----------------------------------------------------------------------------
+
+    # Finds and clicks the Input Form dropdown
     def click_input_form_dropdown(self):
         click_input_forms = self.driver.find_element(By.XPATH, "//a[@class='dropdown-toggle'][normalize-space()='Input Forms']")
         click_input_forms.click()
 
+    # Finds and clicks the Simple Form Demo button
     def click_simple_form_demo_button(self):
         click_simple_form = self.driver.find_element(By.XPATH, "//*[@id='navbar-brand-centered']/ul[1]/li[1]/ul/li[1]/a")
         click_simple_form.click()
 
+# Tests --------------------------------------------------------------------------------
+
+    # Tests the Basic Form single input field
     def test_basic_form(self):
         self.click_input_form_dropdown()
         self.click_simple_form_demo_button()
@@ -34,6 +43,7 @@ class SeleniumEasyTest(unittest.TestCase):
         message_box = self.driver.find_element(By.ID, "display")
         assert message_box.text == "Hello World!"
 
+    # Tests the Two Input field form
     def test_form_two_input_fields(self):
         self.click_input_form_dropdown()
         self.click_simple_form_demo_button()
@@ -46,6 +56,7 @@ class SeleniumEasyTest(unittest.TestCase):
         sum_total = self.driver.find_element(By.ID, "displayvalue")
         assert sum_total.text == "8"
 
+    # A simple checkbox test
     def test_basic_checkbox(self):
         self.click_input_form_dropdown()
         click_checkbox_demo = self.driver.find_element(By.XPATH, "//*[@id='navbar-brand-centered']/ul[1]/li[1]/ul/li[2]/a")
@@ -54,6 +65,7 @@ class SeleniumEasyTest(unittest.TestCase):
         click_on_checkbox.click()
         assert click_on_checkbox.is_selected()
 
+    # A simple radio button test
     def test_radio_button(self):
         self.click_input_form_dropdown()
         click_radio_buttons = self.driver.find_element(By.XPATH, "//*[@id='navbar-brand-centered']/ul[1]/li[1]/ul/li[3]/a")
@@ -62,6 +74,7 @@ class SeleniumEasyTest(unittest.TestCase):
         click_male_radiobutton.click()
         assert click_male_radiobutton.is_selected()
 
+    # Tests the Ajax Form page
     def test_ajax_form_submit(self):
         self.click_input_form_dropdown()
         click_ajax_form_submit = self.driver.find_element(By.XPATH, "//*[@id='navbar-brand-centered']/ul[1]/li[1]/ul/li[6]/a")
@@ -76,6 +89,7 @@ class SeleniumEasyTest(unittest.TestCase):
         checking_submit_control = self.driver.find_element(By.ID, "submit-control")
         assert checking_submit_control.text == "Form submited Successfully!"
 
+    # Tests the Alert button after the alert was accepted
     def test_alert_box(self):
         click_alerts_modals = self.driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/nav/div/div[2]/ul[2]/li[2]/a")
         click_alerts_modals.click()
@@ -86,6 +100,7 @@ class SeleniumEasyTest(unittest.TestCase):
         Alert(self.driver).accept()
         assert conform_box_button.is_enabled()
 
+    # Teardown function for Unittest TestCase
     @classmethod
     def tearDown(self):
         self.driver.quit()
